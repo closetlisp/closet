@@ -8,7 +8,7 @@
 
 project = 'Closet'
 copyright = '2025, Closet contributors'
-author = 'Closet'
+author = 'Closet contributors'
 release = '0.12'
 
 # -- General configuration ---------------------------------------------------
