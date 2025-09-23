@@ -1,8 +1,9 @@
 Closet documentation
 ====================
 
-Closet is a Lisp-based programming language focused on automating code generation.
-Typically, Closet should almost never be used on its own. Instead, it is used to generate, process and run programs in other languages.
+
+Closet is modern Lisp-based language for scripted code generation. It can generate, process, build and run code in any other language.
+
 
 This documentation covers the syntax and builtins of Closet.
 It serves as both a tutorial and an updated reference of the core semantics and builtins, with specialized entries to cover specific uses of Closet.
@@ -15,22 +16,8 @@ Note: Closet is the new name of the `Antilisp programming language`_. While the 
 
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 3
 
-   introduction
-   expressions
-   builtin types <types>
-   printing values <printing>
-   strings
-   list processing <lists>
-   functions
-   variables
-   namespaces
 
-   procedural programming <procedural>
-   object oriented programming <oop>
-   metaprogramming
-   reflection
-   exceptions
-   file access <files>
+   lang
+   lib
