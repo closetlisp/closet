@@ -17,7 +17,7 @@ This section of the documentation describes the features of the Closet programmi
    List processing <lang/lists>
    lang/functions
    lang/variables
-   lang/namespaces
+   .. lang/namespaces
 
    lang/procedural
    lang/oop
