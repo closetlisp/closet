@@ -6,7 +6,7 @@ This section of the documentation describes the features of the Closet programmi
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    lang/introduction
