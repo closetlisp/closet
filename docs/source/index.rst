@@ -16,7 +16,7 @@ Note: Closet is the new name of the `Antilisp programming language`_. While the 
 
 
 .. toctree::
-   :maxdepth: 3
+   :titlesonly:
 
 
    lang
