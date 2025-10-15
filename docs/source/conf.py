@@ -14,7 +14,14 @@ release = '0.12'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+# custom extension imports
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path('exts').resolve()))
+
+
+extensions = ["svbuild"]
 
 templates_path = ['_templates']
 exclude_patterns = []
