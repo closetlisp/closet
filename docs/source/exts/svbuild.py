@@ -164,7 +164,11 @@ class SvelteBuilder(Builder):
 
 
     def write_doc(self, docname: str, doctree: Document):
-        dest = self.outdir / docname / "+page.svelte"
+        if docname.endswith("index"):
+            assert docname == 'index'
+            dest = self.outdir / '+page.svelte'
+        else:
+            dest = self.outdir / docname / "+page.svelte"
         dest.parent.mkdir(parents=True, exist_ok=True)
 
         visitor = self.create_translator(doctree, self)
