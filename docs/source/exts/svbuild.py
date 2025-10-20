@@ -37,23 +37,6 @@ from docutils.nodes import document as Document
 logger = logging.getLogger(__name__)
 
 
-class SvelteWriter(Writer):
-    """
-    produce a svelte code output
-    """
-    def __init__(self, builder):
-        super().__init__()
-        self.builder = builder
-        print("writer init:")
-        print(builder)
-
-    def translate(self) -> None:
-        # TODO: implement
-        # https://github.com/sphinx-doc/sphinx/blob/master/sphinx/writers/text.py (TextWriter.translate)
-        print("writer translate:")
-        self.output = "svelte result"
-
-
 class SvelteTranslator(SphinxTranslator):
     """
     convert document nodes to svelte
@@ -62,9 +45,92 @@ class SvelteTranslator(SphinxTranslator):
 
     def __init__(self, document: Document, builder: SvelteBuilder):
         super().__init__(document, builder)
-        print("translator init:")
-        print(document)
-        print(builder)
+
+        self.parts = []
+
+
+    # hooks to override in order to finish without errors and warnings
+    def visit_Text(self, node):
+        self.parts.append(node.astext())
+    def depart_Text(self, node):
+        pass
+    def visit_title(self, node):
+        pass
+    def depart_title(self, node):
+        pass
+    def visit_paragraph(self, node):
+        pass
+    def depart_paragraph(self, node):
+        pass
+    def visit_reference(self, node):
+        pass
+    def depart_reference(self, node):
+        pass
+    def visit_target(self, node):
+        pass
+    def depart_target(self, node):
+        pass
+    def visit_list_item(self, node):
+        pass
+    def depart_list_item(self, node):
+        pass
+    def visit_bullet_list(self, node):
+        pass
+    def depart_bullet_list(self, node):
+        pass
+    def visit_compound(self, node):
+        pass
+    def depart_compound(self, node):
+        pass
+    def visit_section(self, node):
+        pass
+    def depart_section(self, node):
+        pass
+    def visit_document(self, node):
+        pass
+    def depart_document(self, node):
+        self.body = '\n'.join(self.parts)
+    def visit_literal(self, node):
+        pass
+    def depart_literal(self, node):
+        pass
+    def visit_literal_block(self, node):
+        pass
+    def depart_literal_block(self, node):
+        pass
+    def visit_comment(self, node):
+        pass
+    def depart_comment(self, node):
+        pass
+    def visit_colspec(self, node):
+        pass
+    def depart_colspec(self, node):
+        pass
+    def visit_entry(self, node):
+        pass
+    def depart_entry(self, node):
+        pass
+    def visit_row(self, node):
+        pass
+    def depart_row(self, node):
+        pass
+    def visit_thead(self, node):
+        pass
+    def depart_thead(self, node):
+        pass
+    def visit_tbody(self, node):
+        pass
+    def depart_tbody(self, node):
+        pass
+    def visit_tgroup(self, node):
+        pass
+    def depart_tgroup(self, node):
+        pass
+    def visit_table(self, node):
+        pass
+    def depart_table(self, node):
+        pass
+
 
 
 class SvelteBuilder(Builder):
@@ -78,7 +144,8 @@ class SvelteBuilder(Builder):
     default_translator_class = SvelteTranslator
 
     def init(self):
-        print("builder init:")
+        "hook called during __init__"
+        pass
 
     def get_outdated_docs(self) -> Iterator[str]:
         """
@@ -97,9 +164,14 @@ class SvelteBuilder(Builder):
 
 
     def write_doc(self, docname: str, doctree: Document):
-        dest = self.outdir / (docname + ".svelte")
+        dest = self.outdir / docname / "+page.svelte"
         dest.parent.mkdir(parents=True, exist_ok=True)
-        logger.warning('did not process %s', dest)
+
+        visitor = self.create_translator(doctree, self)
+        assert isinstance(visitor, SvelteTranslator)
+        doctree.walkabout(visitor)
+        output = visitor.body
+        dest.write_text(output)
 
     def get_target_uri(self, docname, typ: str | None = None):
         return ''
